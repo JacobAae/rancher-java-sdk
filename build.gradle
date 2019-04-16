@@ -1,5 +1,28 @@
+import org.gradle.api.publish.maven.MavenPublication
+
+buildscript {
+    repositories {
+        maven {
+            url 'https://artifactory.cardlay.com/artifactory/jvm-virtuel-cache'
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+
+    }
+
+    dependencies {
+        //Check for the latest version here: http://plugins.gradle.org/plugin/com.jfrog.artifactory
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+    }
+}
+
+
 apply plugin: 'java'
 apply plugin: 'maven-publish'
+apply plugin: "com.jfrog.artifactory"
+
 
 repositories {
     jcenter()
@@ -25,6 +48,41 @@ task javadocJar(type: Jar) {
     from javadoc.destinationDir
 }
 
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        defaults {
+            publications ('mavenJava')
+        }
+
+        repository {
+            repoKey = 'jvm-dev-local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'jvm-virtuel-cache'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+
+        }
+    }
+
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+/*
 publishing {
     publications {
         sdk(MavenPublication) {
@@ -38,3 +96,4 @@ publishing {
         }
     }
 }
+*/

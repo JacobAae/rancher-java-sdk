@@ -51,3 +51,7 @@ To update the API, perform the following steps:
 1. `cd generator`
 1. `curl -o schemas.json https://raw.githubusercontent.com/rancher/go-rancher/master/generator/schemas.json`
 1. `make && ./generator`
+
+## Releasing
+
+`gw clean artifactoryPublish artifactoryDeploy`
