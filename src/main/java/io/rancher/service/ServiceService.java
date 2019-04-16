@@ -20,7 +20,7 @@ import retrofit2.http.QueryMap;
 
 public interface ServiceService {
 
-  @GET("service")
+  @GET("service?limit=200")
   Call<TypeCollection<Service>> list();
 
   @GET("service")
