@@ -8,6 +8,10 @@ repositories {
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
+
+version="1.0.0"
+group="io.rancher.gradle"
+
 dependencies {
     compile "com.squareup.retrofit2:retrofit:2.0.0-beta3"
     compile "com.squareup.retrofit2:converter-jackson:2.0.0-beta3"
