@@ -91,7 +91,9 @@ public class LaunchConfig extends AbstractType {
     private Integer memory;
     
     private Integer memoryMb;
-    
+
+    private Integer memoryReservation;
+
     private Integer memorySwap;
     
     private Boolean nativeContainer;
@@ -506,6 +508,14 @@ public class LaunchConfig extends AbstractType {
       this.memoryMb = memoryMb;
     }
     
+    public Integer getMemoryReservation() {
+        return this.memoryReservation;
+    }
+
+    public void setMemoryReservation(Integer memoryReservation) {
+      this.memoryReservation = memoryReservation;
+    }
+
     public Integer getMemorySwap() {
         return this.memorySwap;
     }
