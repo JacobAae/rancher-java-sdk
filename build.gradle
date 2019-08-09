@@ -18,13 +18,23 @@ buildscript {
     }
 }
 
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
 
-apply plugin: 'java'
-apply plugin: 'maven-publish'
 apply plugin: "com.jfrog.artifactory"
 
 
 repositories {
+    mavenLocal()
+    maven {
+        url 'https://artifactory.cardlay.com/artifactory/jvm-virtuel-cache'
+        credentials {
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+        }
+    }
     jcenter()
 }
 
@@ -82,6 +92,7 @@ publishing {
         }
     }
 }
+
 /*
 publishing {
     publications {
